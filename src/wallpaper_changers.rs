@@ -9,22 +9,18 @@ pub trait WallpaperChanger {
     fn accepted_formats(&self) -> Vec<String>;
 }
 
-#[derive(EnumIter, Clone)]
+#[derive(EnumIter, Clone, Default)]
 pub enum WallpaperChangers {
+    #[default]
     Hyprpaper,
     Swaybg(SwaybgModes, String),
 }
 
-impl Default for WallpaperChangers {
-    fn default() -> Self {
-        WallpaperChangers::Hyprpaper
-    }
-}
-
-#[derive(Clone, IntoStaticStr, VariantArray)]
+#[derive(Clone, IntoStaticStr, VariantArray, Default)]
 pub enum SwaybgModes {
     Stretch,
     Fit,
+    #[default]
     Fill,
     Center,
     Tile,
@@ -43,12 +39,6 @@ impl SwaybgModes {
             5 => SwaybgModes::SolidColor,
             _ => SwaybgModes::Stretch,
         }
-    }
-}
-
-impl Default for SwaybgModes {
-    fn default() -> Self {
-        SwaybgModes::Fill
     }
 }
 
